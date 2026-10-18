@@ -23,26 +23,26 @@ function DashboardClient({ ownerId }: { ownerId: string }) {
             setLoading(false)
         }
     }
-     useEffect(()=>{
-if(ownerId){
-    const handleGetDetails=async ()=>{
-       try {
-            const result = await axios.post("/api/settings/get", { ownerId })
-            if (result.data) {
-                setBusinessName(result.data.businessName || "")
-                setSupportEmail(result.data.supportEmail || "")
-                setKnowledge(result.data.knowledge || "")
+    useEffect(() => {
+        if (ownerId) {
+            const handleGetDetails = async () => {
+                try {
+                    const result = await axios.post("/api/settings/get", { ownerId })
+                    if (result.data) {
+                        setBusinessName(result.data.businessName || "")
+                        setSupportEmail(result.data.supportEmail || "")
+                        setKnowledge(result.data.knowledge || "")
+                    }
+                } catch (error) {
+                    console.log(error)
+
+                }
             }
-        } catch (error) {
-            console.log(error)
-           
+
+            handleGetDetails()
         }
-    }
 
-    handleGetDetails()
-}
-
-     },[ownerId])
+    }, [ownerId])
     return (
         <div className='min-h-screen bg-zinc-50 text-zinc-900'>
             <motion.div
@@ -53,7 +53,7 @@ if(ownerId){
             >
                 <div className='max-w-7xl mx-auto px-6 h-16 flex items-center justify-between'>
                     <div className='text-lg font-semibold tracking-tight' onClick={() => navigate.push("/")}>Ai-Support<span className='text-zinc-500'>Bot</span></div>
-                    <button className='px-4 py-2 rounded-lg border border-zinc-200 text-sm hover:bg-zinc-100 transition' onClick={()=>navigate.push("/embed")}>Embed ChatBot</button>
+                    <button className='px-4 py-2 rounded-lg border border-zinc-200 text-sm hover:bg-zinc-100 transition' onClick={() => navigate.push("/embed")}>Embed ChatBot</button>
                 </div>
             </motion.div>
 
@@ -79,10 +79,10 @@ if(ownerId){
                         <p className='text-sm text-zinc-500 mb-4'>Add FAQs, policies, delivery info, refunds, etc.</p>
                         <div className='space-y-4'>
                             <textarea className='w-full h-54 rounded-xl border border-zinc-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black/80' placeholder={`Example:
-• Refund policy: 7 days return available
-• Delivery time: 3–5 working days
-• Cash on Delivery available
-• Support hours`} onChange={(e) => setKnowledge(e.target.value)} value={knowledge} />
+                             • Refund policy: 7 days return available
+                             • Delivery time: 3–5 working days
+                             • Cash on Delivery available
+                             • Support hours`} onChange={(e) => setKnowledge(e.target.value)} value={knowledge} />
                         </div>
                     </div>
 
